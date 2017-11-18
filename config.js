@@ -1,6 +1,5 @@
 var path = require('path'),
-  multer = require('multer'),
-  crypto = require('crypto')
+  multer = require('multer')
 
 var config = {
   port: process.env.PORT ? process.env.PORT : 3003,
