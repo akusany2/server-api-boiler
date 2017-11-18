@@ -1,6 +1,6 @@
 var router = require('express').Router(),
 User = require('../models/User'),
-userController = require('../controllers/user'),
+userController = use('controllers/user'),
 bcrypt = require('bcrypt');
 
 router

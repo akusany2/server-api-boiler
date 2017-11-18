@@ -1,8 +1,10 @@
+require('./bootstrap');
+
 var express = require('express'),
-compression =  require('compression'),
-app = express(),
-bodyParser = require('body-parser'),
-port = 3003;
+  compression = require('compression'),
+  app = express(),
+  bodyParser = require('body-parser'),
+  config = use('config');
 
 // Connection to db
 require('./models/connection');
@@ -41,5 +43,5 @@ app
     res.json(err);
   });
 
-app.listen(port);
-console.log(`Server listening to localhost:${port}`);
+app.listen(config.port);
+console.log(`Server listening to localhost:${config.port}`);
