@@ -3,11 +3,12 @@ var router = require('express').Router(),
   NewCarController = use('controllers/carController'),
   userController = use('controllers/userController');
 
+// verifyAuth adds token in res.locals - if passed
 var verifyAuth = authController.verifyAuth;
 
 module.exports = router
   .get('/', function (req, res) {
-    res.send('cars app')
+    res.json({message: 'This is a car app!'})
   })
 
   // authenticate
@@ -20,10 +21,8 @@ module.exports = router
 
   // users
   .get('/user/setup', userController.setup)
-  .use('/user', verifyAuth, (router) => {
-    router.get('/', userController.index)
-      .post('/', userController.post)
-      
-  })
+  .get('/user', verifyAuth, userController.index)
+  .post('/user', verifyAuth, userController.post)
+  
 
 
