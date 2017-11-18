@@ -29,5 +29,12 @@ module.exports = {
       });
     
     
-    }
+  },
+  index: (req, res) => {
+    console.log(res)
+    res.json({ token: res.locals.token })
+  },
+  post: (req, res) => {
+    res.send('Post user route');
+  }
 }

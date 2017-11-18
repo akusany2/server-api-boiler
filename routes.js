@@ -1,9 +1,9 @@
 var router = require('express').Router(),
-  authController = use('controllers/authenticate'),
-  NewCarController = use('controllers/newCar'),
-  userController = use('controllers/user');
+  authController = use('controllers/authController'),
+  NewCarController = use('controllers/carController'),
+  userController = use('controllers/userController');
 
-var verifyAuth = use('controllers/authenticate').verifyAuth;
+var verifyAuth = authController.verifyAuth;
 
 module.exports = router
   .get('/', function (req, res) {
@@ -19,13 +19,11 @@ module.exports = router
   .post('/cars/add', NewCarController.add)
 
   // users
-  .get('/user', verifyAuth, (req, res) => {
-    res.json({ token: res.locals.token })
+  .get('/user/setup', userController.setup)
+  .use('/user', verifyAuth, (router) => {
+    router.get('/', userController.index)
+      .post('/', userController.post)
+      
   })
-  .post('/user', verifyAuth,  (req, res) => {
-    // console.log(req.body);
-    res.send('Post user route');
-  })
-  .get('/user/setup', userController.setup);
 
 
