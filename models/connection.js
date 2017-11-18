@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-config = require('../config');
+config = use('config');
 
 mongoose.connect(config.database, {
   useMongoClient: true
