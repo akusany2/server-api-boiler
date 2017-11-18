@@ -15,7 +15,7 @@ app
   .use(config.cors)
 
   .use(bodyParser.json())
-	.use(bodyParser.urlencoded({extended: false}))
+  .use(bodyParser.urlencoded({ extended: false }))
   // .use(compression())
 
   // .use(express.static('./public'))
@@ -24,8 +24,11 @@ app
   
   .use('/api', routes)
   // error handler
-  .use(function(err, req, res, next){
+  .use(function (err, req, res, next) {
     res.json(err);
+  })
+  .use(function (req, res, next) {
+    res.status(404).json({message: 'Page not found'})
   });
 
 app.listen(config.port);
