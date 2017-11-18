@@ -1,14 +1,21 @@
 var router = require('express').Router(),
+  multer = require('multer'),
+  config = use('config'),
+  middlewares = use('middlewares'),
   authController = use('controllers/authController'),
   NewCarController = use('controllers/carController'),
-  userController = use('controllers/userController');
+  userController = use('controllers/userController'),
+  uploadController = use('controllers/uploadController');
 
+// multer upload 
+var upload = config.multerUpload()
+  ;
 // verifyAuth adds token in res.locals - if passed
-var verifyAuth = authController.verifyAuth;
+var verifyAuth = middlewares.verifyAuth;
 
 module.exports = router
   .get('/', function (req, res) {
-    res.json({message: 'This is a car app!'})
+    res.json({ message: 'This is a car app!' })
   })
 
   // authenticate
@@ -23,6 +30,9 @@ module.exports = router
   .get('/user/setup', userController.setup)
   .get('/user', verifyAuth, userController.index)
   .post('/user', verifyAuth, userController.post)
-  
 
-
+  // file uploads
+  .get('/upload', upload.single('file'), uploadController.index)
+  .post('/upload', upload.single('file'), uploadController.upload)
+  .get('/uploads', upload.array('files'), uploadController.index)
+  .post('/uploads', upload.array('files'), uploadController.uploads)

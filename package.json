@@ -17,6 +17,7 @@
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.1",
+    "multer": "^1.3.0",
     "nodemon": "^1.11.0",
     "unirest": "^0.5.1"
   }
