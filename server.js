@@ -1,4 +1,4 @@
-require('./bootstrap');
+require('./helper');
 
 var express = require('express'),
   compression = require('compression'),
