@@ -10,11 +10,13 @@ global.use = function (pathname) {
 
 // auto load modules from folder
 global.loadDirModules = function (dir) {
+  var obj = {}
   fs.readdirSync(dir).forEach((file) => {
     
     var fileName = file.split('.')[0];
     var pathName = path.join(dir, '/', file);
     
-    return {filename: use(pathName)};
+    obj[fileName] = use(pathName)
   })
+  return obj
 }
