@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server"
+    "start:dev": "NODE_ENV=dev nodemon server --exec babel-node --presets es2015",
+    "start:prod": "nodemon server --exec babel-node --presets es2015 "
   },
   "keywords": [],
   "author": "",
@@ -15,10 +16,17 @@
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "express": "^4.15.3",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
+    "graphql-tools": "^2.8.0",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.11.1",
     "multer": "^1.3.0",
     "nodemon": "^1.11.0",
     "unirest": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }
