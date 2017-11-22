@@ -30,14 +30,23 @@ type Mutation {
   helloFunc(name: String!): HelloType
 }
 
+input Test{
+  string1: String
+}
+type TestType{
+  string1: String
+}
 type Query {
-  hello: String
+  hello(queryTest: Test): TestType
 }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => 'hi'
+    hello: (parent, val) => {
+      console.log(val)
+      return {string1: 'hi'}
+    }
   },
   Mutation: {
     uploadFile: (parent, { file }) => {
@@ -46,7 +55,7 @@ const resolvers = {
     },
     helloFunc: (parent, val) => {
       console.log(val)
-      return val;
+      return {name: `Argument you entered is: ${val.name}`};
     }
   }
 }
@@ -55,3 +64,14 @@ module.exports = makeExecutableSchema({
   typeDefs,
   resolvers
 });
+
+
+// in graphiql
+// query AnyFunc($name: Test){
+//   hello(queryTest: $name){
+//     string1
+//   }
+// }
+
+// query variable
+// {"string1": "123asd"}
